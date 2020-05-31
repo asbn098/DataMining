@@ -4,5 +4,5 @@
 
 
 sarima.docx : 피자,치킨,중국음식 주문건수에 대하여 sarima 분석 정리
-<br>배달업종별 시계열.Rmd : sarima 분석 코드
-신경망 분석.docx : SPSS Modeler를 통한 신경망 분석 
+<br><br>배달업종별 시계열.Rmd : sarima 분석 코드
+<br><br>신경망 분석.docx : SPSS Modeler를 통한 신경망 분석 
