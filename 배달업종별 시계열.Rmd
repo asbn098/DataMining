@@ -1,0 +1,141 @@
+---
+title: "치킨sarima"
+author: "ParkJiyeon"
+date: '2019 12 11 '
+output: word_document
+---
+
+```{r 치킨}
+library(TTR)
+library(forecast)
+setwd("C:/Users/박지연/Desktop")
+chicken<- read.csv("4년치킨최종데이터변환.csv",header=TRUE,sep=",")
+
+
+#시계열 데이터로 변환
+chicken_ts <- ts(chicken$order_mean)
+chicken_ts
+
+plot.ts(chicken_ts)
+
+# 차분을 통해 데이터 정상화
+chicken_diff1 <- diff(chicken_ts, differences = 1)
+chicken_diff2 <- diff(chicken_ts, differences = 2)
+chicken_diff3 <- diff(chicken_ts, differences = 3)
+
+plot.ts(chicken_ts)
+plot.ts(chicken_diff1)    # 1차 차분만 해도 어느정도 정상화 패턴을 보임
+plot.ts(chicken_diff2)
+plot.ts(chicken_diff3)
+
+
+
+#ACF/PACF 차트나 auto.arima 함수 사용하여 최적화된 파라미터를 찾는다.
+acf(chicken_diff1,lag.max=20)
+pacf(chicken_diff1, lag.max = 20) 
+library(forecast)
+auto.arima(chicken_ts)
+
+# 예측
+chicken_arima <- arima(chicken_ts, order = c(1,0,0))    # 차분통해 확인한 값 적용
+summary(chicken_arima)
+chicken_arima
+
+chicken_fcast <- forecast(chicken_arima, h =5)
+chicken_fcast
+
+plot(chicken_fcast)
+
+summary(chicken_fcast)
+
+```
+
+```{r 피자음식}
+library(TTR)
+library(forecast)
+setwd("C:/Users/박지연/Desktop")
+pizza<- read.csv("4년피자최종데이터.csv",header=TRUE,sep=",")
+
+
+#시계열 데이터로 변환
+pizza_ts <- ts(pizza$order_mean)
+pizza_ts
+
+plot.ts(pizza_ts)
+
+# 차분을 통해 데이터 정상화
+pizza_diff1 <- diff(pizza_ts, differences = 1)
+pizza_diff2 <- diff(pizza_ts, differences = 2)
+pizza_diff3 <- diff(pizza_ts, differences = 3)
+
+plot.ts(pizza_ts)
+plot.ts(pizza_diff1)    # 1차 차분만 해도 어느정도 정상화 패턴을 보임
+plot.ts(pizza_diff2)
+plot.ts(pizza_diff3)
+
+
+
+#ACF/PACF 차트나 auto.arima 함수 사용하여 최적화된 파라미터를 찾는다.
+acf(pizza_diff1,lag.max=20)
+pacf(pizza_diff1, lag.max = 20) 
+library(forecast)
+auto.arima(pizza_ts)
+
+# 예측
+pizza_arima <- arima(pizza_ts, order = c(0,1,0))    # 차분통해 확인한 값 적용
+summary(pizza_arima)
+pizza_arima
+
+pizza_fcast <- forecast(pizza_arima, h =5)
+pizza_fcast
+
+plot(pizza_fcast)
+
+summary(pizza_arima)
+
+```
+
+```{r 중국음식}
+library(TTR)
+library(forecast)
+setwd("C:/Users/박지연/Desktop")
+chinese<- read.csv("4년중국음식최종데이터.csv",header=TRUE,sep=",")
+
+
+#시계열 데이터로 변환
+chinese_ts <- ts(chinese$order_mean)
+chinese_ts
+
+plot.ts(chinese_ts)
+
+
+# 차분을 통해 데이터 정상화
+chinese_diff1 <- diff(chinese_ts, differences = 1)
+chinese_diff2 <- diff(chinese_ts, differences = 2)
+chinese_diff3 <- diff(chinese_ts, differences = 3)
+
+plot.ts(chinese_diff1)    # 1차 차분만 해도 어느정도 정상화 패턴을 보임
+plot.ts(chinese_diff2)
+plot.ts(chinese_diff3)
+
+
+
+#ACF/PACF 차트나 auto.arima 함수 사용하여 최적화된 파라미터를 찾는다.
+acf(chinese_diff1,lag.max=20)
+pacf(chinese_diff1, lag.max = 20) 
+library(forecast)
+auto.arima(chinese_ts)
+
+# 예측
+chinese_arima <- arima(chinese_ts, order = c(1,0,0))    # 차분통해 확인한 값 적용
+summary(chinese_arima)
+chinese_arima
+
+chinese_fcast <- forecast(chinese_arima, h =5)
+chinese_fcast
+
+plot(chinese_fcast)
+
+summary(chinese_fcast)
+
+```
